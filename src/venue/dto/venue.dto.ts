@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsNotEmpty,
@@ -34,4 +35,20 @@ export class CreateVenueDto {
   @IsOptional()
   @IsBoolean()
   isNegotiable?: boolean;
+}
+
+export class FindVenueDto {
+  @IsString()
+  @IsOptional()
+  keyword?: string;
+
+  @IsNumber()
+  @IsOptional()
+  @Type(() => Number)
+  page?: number;
+
+  @IsNumber()
+  @IsOptional()
+  @Type(() => Number)
+  pageSize?: number; // Include pageSize for dynamic page size
 }
