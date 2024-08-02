@@ -65,4 +65,19 @@ export class VenueService {
       .skip(skip)
       .exec();
   }
+
+  async getById(venueId: string): Promise<any> {
+    const venue = await this.venueModel.findOne({
+      _id: venueId,
+      isVenueApproved: true,
+    });
+    if (!venue) {
+      return;
+    }
+    if (venue && venue.venueAlreadyBooked) {
+      return 'venue has been booked already';
+    }
+
+    return venue;
+  }
 }

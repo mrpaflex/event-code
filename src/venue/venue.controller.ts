@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { VenueService } from './venue.service';
 import { CurrentUser } from 'src/auth/decorator/current-user-decorator';
 import { VendorDocument } from 'src/vendor/schemas/vendor.schema';
@@ -23,11 +31,15 @@ export class VenueController {
     return await this.venueService.create(payload, user);
   }
 
-
-
   @Public()
   @Get('find-venue')
   async findVenue(@Query() payload?: FindVenueDto): Promise<VenueDocument[]> {
     return await this.venueService.findVenue(payload);
+  }
+
+  @Public()
+  @Get('find-one/:venueId')
+  async getById(@Param('venueId') venueId: string) {
+    return await this.venueService.getById(venueId);
   }
 }

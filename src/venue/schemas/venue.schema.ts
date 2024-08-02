@@ -25,6 +25,12 @@ export class Venue {
   @Prop({ type: Boolean, default: false })
   isNegotiable?: boolean;
 
+  @Prop({ type: Boolean, default: false })
+  isVenueApproved?: boolean;
+
+  @Prop({ type: Boolean, default: false })
+  venueAlreadyBooked?: boolean;
+
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Vendor', required: true })
   ownerId: mongoose.Types.ObjectId;
 
