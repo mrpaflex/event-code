@@ -14,11 +14,11 @@ export class VenueService {
     private vendorService: VendorService,
   ) {}
 
-  async create(payload: CreateVenueDto, user: VendorDocument) {
+  async create(payload: CreateVenueDto, vendor: VendorDocument) {
     const { name, eventType, location } = payload;
 
     //check if the vendor is a venue owner
-    if (user.businessDetails.interest !== InterestEnum.venueOwner) {
+    if (vendor.businessDetails.interest !== InterestEnum.venueOwner) {
       throw new UnauthorizedException(
         'Only Vendor with Venue Owner roles can upload venues, contact support',
       );
@@ -26,7 +26,7 @@ export class VenueService {
 
     const venue = await this.venueModel.create({
       ...payload,
-      ownerId: user._id,
+      ownerId: vendor._id,
     });
 
     return venue;

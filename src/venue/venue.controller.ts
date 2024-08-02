@@ -26,9 +26,9 @@ export class VenueController {
   @Post()
   async create(
     @Body() payload: CreateVenueDto,
-    @CurrentUser() user: VendorDocument,
+    @CurrentUser() vendor: VendorDocument,
   ) {
-    return await this.venueService.create(payload, user);
+    return await this.venueService.create(payload, vendor);
   }
 
   @Public()
